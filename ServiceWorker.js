@@ -1,4 +1,4 @@
-const cacheName = "DefaultCompany-Moderna-Covid-Vaccine-1.0";
+const cacheName = "DefaultCompany-Moderna-Covid-Vaccine-0.0.1";
 const contentToCache = [
     "Build/CovidWarrior.loader.js",
     "Build/CovidWarrior.framework.js.unityweb",
