@@ -1,16 +1,17 @@
-const cacheName = "0.0.10";
+const cacheName = "0.1.1";
 const contentToCache = [
-    "Build/CovidWarrior.loader.js?id=0.0.10",
-    "Build/CovidWarrior.framework.js.unityweb?id=0.0.10",
-    "Build/CovidWarrior.data.unityweb?id=0.0.10",
-    "Build/CovidWarrior.wasm.unityweb?id=0.0.10",
+    "Build/CovidWarrior.loader.js?id=0.1.1",
+    "Build/CovidWarrior.framework.js.unityweb?id=0.1.1",
+    "Build/CovidWarrior.data.unityweb?id=0.1.1",
+    "Build/CovidWarrior.wasm.unityweb?id=0.1.1",
     "TemplateData/style.css"
 
 ];
 
 self.addEventListener('install', function (e) {
     console.log('[Service Worker] Install');
-    
+
+    self.skipWaiting();
  
     e.waitUntil((async function () {
       const cache = await caches.open(cacheName);
@@ -24,7 +25,7 @@ self.addEventListener('activate', function(event) {
         caches.keys().then(function(cacheNames) {
             return Promise.all(
                 cacheNames.map(function(cacheName) {
-                    if (cacheName !== "Penpeer-Moderna-Covid-Vaccine-0.0.10") {
+                    if (cacheName !== "Penpeer-Moderna-Covid-Vaccine-0.1.1") {
                         return caches.delete(cacheName);
                     }
                 })
