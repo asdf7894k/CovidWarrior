@@ -1,9 +1,9 @@
-const cacheName = "0.0.9";
+const cacheName = "0.0.10";
 const contentToCache = [
-    "Build/CovidWarrior.loader.js?id=0.0.9",
-    "Build/CovidWarrior.framework.js.unityweb?id=0.0.9",
-    "Build/CovidWarrior.data.unityweb?id=0.0.9",
-    "Build/CovidWarrior.wasm.unityweb?id=0.0.9",
+    "Build/CovidWarrior.loader.js?id=0.0.10",
+    "Build/CovidWarrior.framework.js.unityweb?id=0.0.10",
+    "Build/CovidWarrior.data.unityweb?id=0.0.10",
+    "Build/CovidWarrior.wasm.unityweb?id=0.0.10",
     "TemplateData/style.css"
 
 ];
@@ -24,7 +24,7 @@ self.addEventListener('activate', function(event) {
         caches.keys().then(function(cacheNames) {
             return Promise.all(
                 cacheNames.map(function(cacheName) {
-                    if (cacheName !== "Penpeer-Moderna-Covid-Vaccine-0.0.9") {
+                    if (cacheName !== "Penpeer-Moderna-Covid-Vaccine-0.0.10") {
                         return caches.delete(cacheName);
                     }
                 })
