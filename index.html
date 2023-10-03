@@ -25,19 +25,15 @@
             if (registrations.length > 0) {
               
               registrations.forEach(function (registration) {
-                const version = registration.active.scriptURL.includes(cacheName)
-                
-                if (registration.active && version !== "0.0.9") {
-                  
                   registration.unregister().then(function (success) {
                     if (success) {
-                      navigator.serviceWorker.register("ServiceWorker.js");
                     } else {
                       console.error("無法解除舊的 Service Worker 註冊。");
                     }
                   });
-                }
               });
+              navigator.serviceWorker.register("ServiceWorker.js");
+              
             } else {
               navigator.serviceWorker.register("ServiceWorker.js");
             }
