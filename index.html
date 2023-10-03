@@ -6,7 +6,6 @@
     <title>新冠戰士</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
-    <link rel="manifest" href="manifest.webmanifest">
   </head>
   <body>
     <div id="unity-container">
@@ -22,8 +21,28 @@
     <script>
       window.addEventListener("load", function () {
         if ("serviceWorker" in navigator) {
-          navigator.serviceWorker.register("ServiceWorker.js");
-        }
+          navigator.serviceWorker.getRegistrations().then(function (registrations) {
+            if (registrations.length > 0) {
+              
+              registrations.forEach(function (registration) {
+                const version = registration.active.scriptURL.includes(cacheName)
+                
+                if (registration.active && version !== "0.0.9") {
+                  
+                  registration.unregister().then(function (success) {
+                    if (success) {
+                      navigator.serviceWorker.register("ServiceWorker.js");
+                    } else {
+                      console.error("無法解除舊的 Service Worker 註冊。");
+                    }
+                  });
+                }
+              });
+            } else {
+              navigator.serviceWorker.register("ServiceWorker.js");
+            }
+        });
+      }
       });
 
       var container = document.querySelector("#unity-container");
@@ -57,15 +76,15 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/CovidWarrior.loader.js?id=0.0.7";
+      var loaderUrl = buildUrl + "/CovidWarrior.loader.js?id=0.0.9";
       var config = {
-        dataUrl: buildUrl + "/CovidWarrior.data.unityweb?id=0.0.7",
-        frameworkUrl: buildUrl + "/CovidWarrior.framework.js.unityweb?id=0.0.7",
-        codeUrl: buildUrl + "/CovidWarrior.wasm.unityweb?id=0.0.7",
+        dataUrl: buildUrl + "/CovidWarrior.data.unityweb?id=0.0.9",
+        frameworkUrl: buildUrl + "/CovidWarrior.framework.js.unityweb?id=0.0.9",
+        codeUrl: buildUrl + "/CovidWarrior.wasm.unityweb?id=0.0.9",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Penpeer",
         productName: "Moderna-Covid-Vaccine",
-        productVersion: "0.0.7",
+        productVersion: "0.0.9",
         showBanner: unityShowBanner,
       };
 
